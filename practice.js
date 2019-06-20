@@ -116,11 +116,20 @@ contains(names, 'Colt', function (result) {
   Remove any duplicate values from the array, and invoke the callback with the modified array as an argument.
 */
 
-let uniq = function (arr, cb) {
-  // look up indexOf
+// let uniq = function (arr, cb) {
+//   var uniqArr = arr.filter(function (){})
+//   cb(arr);
+// }
+
+function uniq(arr, cb) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr.indexOf(arr[i], i + 1) > -1) {
+      arr.splice(i, 1);
+      i--;
+    }
+  }
   cb(arr);
 }
-
 
 // var uniq = function (jobs) {
 //   var x = jobs.filter(function (item, index) {
@@ -145,8 +154,8 @@ uniq(names, function (uniqArr) {
 */
 
 let each = function (arr, cb) {
-  for (i = 0; i < array.length; i++) {
-    cb(arr[i]) // Should I use for each for these?
+  for (i = 0; i < arr.length; i++) {
+    cb(arr[i], i) // Should I use forEach for these?
   }
 }
 
@@ -167,8 +176,13 @@ each(names, function (item, indice) {
 */
 
 let getUserById = function (users, id, cb) {
-
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].id === id) {
+      cb(users[i]);
+    }
+  }
 }
+// determine EXACTLY where the error is with console.log
 
 // Do not edit the code below.
 var users = [{
